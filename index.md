@@ -74,15 +74,14 @@ ws.on("message", (json) => {
    });
 ``` 
 If all goes well, when you type "!help" in RaeedChat you should get your message, make sure there isn't a bot already using "!" if there is use another prefix or change your command name. 
-Here is the response the server sends when your message is sent successfully 
+Here is the response the server sends when your message is sent successfully its a object
 ```json
-{
  response: {
    code: 200,
    message: "Sent your message - Early Access Bot API"
  }
-}
-```
+``` 
+
 You can read this by changing
 ```js
   .then((data) => {
