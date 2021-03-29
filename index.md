@@ -42,7 +42,8 @@ ws.on("message", (json) => {
     if (d.message == "!help") {
       console.log("received")
     }
-   });
+  }
+});
 ````
 Here the bot's prefix is "!" and when the user types "!help" it will log "received" to the console
 
