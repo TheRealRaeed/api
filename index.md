@@ -103,7 +103,7 @@ This is reading the object data.response.message from the json.
 
 ### Sending replies
 Now, you may want to send a reply instead, this is simple 
-```
+```js
 ws.on("message", (json) => {
   const { e, d } = JSON.parse(json);
   if (e === "MESSAGE_CREATE") { //checks for MESSAGE_CREATE event
