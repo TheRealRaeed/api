@@ -36,7 +36,7 @@ The official name is MESSAGE_CREATE, so listening for the MESSAGE_CREATE event w
     "message": "MESSAGE",
     "id": "ID",
     "messageid": "MESSAGE_ID",
-    "pings": "Pinged Users",
+    "pings": ["id","id","id"],
     "badge": "BADGE"
   }
 }
@@ -117,7 +117,7 @@ Any of these are optional but please send at least one. Make this request to `ht
   }
 }
 ```
-If any of the fields aren't defined they will return `undefined` or `null`. 
+Fields may be omitted when not necessary, or set to null when not filled
 
 This is if there is a error:
 ```json
