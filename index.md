@@ -74,6 +74,7 @@ To send a message you need to make a request with the `Content-Type: application
 ```
 
 Here is that information in table form
+
 | Field        | Type        | Description                    |
 | ------------ | ----------- | ------------------------------ |
 | `message`    |  `String`   | The message you want to send   |
