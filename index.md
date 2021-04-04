@@ -112,9 +112,9 @@ Heres a simple table to show you:
 
 | Field        | Type        | Description          |
 | ------------ | ----------- | -------------------- |
-| `title`      |  `String`   | Title of embed       |
-| `description`|  `String`   | Description of embed |
-| `image`      |  `String`   | Image URL of embed   |
+| `?title`      |  `String`   | Title of embed       |
+| `?description`|  `String`   | Description of embed |
+| `?image`      |  `String`   | Image URL of embed   |
 
 Any of these are optional but please send at least one. Make this request to `https://api.raeedchat.com/api/v1/sendMessage`. The response is the following: 
 ```json
