@@ -2,165 +2,52 @@
 RaeedChat API lets you connect to our servers through a automated bot to interact and entertain users. This allows for a bigger and automated community which can in turn create a better RaeedChat for everyone! We hope you join us in this mission! 
 
 ## Getting Started
-Getting started is completely easy! With our gaia.db databases and token generations, your project will be easy to make. 
-Project Requirements: 
- - Node.js
+Get started with your very first bot!
 
-### Gateway connection
-You will have been given a token by me for using the api. 
 
-First you need to start a gateway connection, you can use the ws library to acheive this. Type `npm i ws, node-fetch` into your console. (node-fetch will be used later)
+### Gateway 
+Secure a connection to our gateway which is wss://api.raeedchat.com/websocket/ 
 
-```js
-const WebSocket = require("ws");
-const ws = new WebSocket("wss://api.raeedchat.com/websocket/");
-```
-This will ensure you can receive messages from the chat 
+### Initialize
+Initialization is highly important! Without proper initialization your requests will be denied! 
 
-### Initial authentication
-To verify your bot and login you have to include your token. THIS IS REQUIRED.
-```js
-ws.on("open", () => {
-  ws.send(
-    JSON.stringify({
-      e: "INIT",
-      d: {
-        token: "YOUR_TOKEN"
-      }
-    })
-  );
-});
-```
-This ensures proper connection to the server
-
-### Reading messages
-When reading a message you can do this: 
-```js
-ws.on("message", (json) => {
-  const { e, d } = JSON.parse(json);
-  if (e === "MESSAGE_CREATE") {
-    if (d.message == "!help") {
-      console.log("received")
-    }
+Please send a event called INIT to the websocket with the following 
+```json 
+{
+  "d": {
+    "token": "YOUR_TOKEN"
   }
-});
-````
-Here the bot's prefix is "!" and when the user types "!help" it will log "received" to the console
+}
+```  
+If this is not provided you will be **disconnected from our websocket** automatically 
 
-### Sending messages
-Now we need to send a response to the user, to achieve this we can use node-fetch. We have installed it in the gateway connection step. 
-```js
-ws.on("message", (json) => {
-  const { e, d } = JSON.parse(json);
-  if (e === "MESSAGE_CREATE") {
-    if (d.message == "!help") {
-      fetch(`https://api.raeedchat.com/api/v1/sendMessage`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer YOUR_TOKEN"
-        },
-        body: JSON.stringify({
-          message: "YOUR_MESSAGE"
-        })
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            console.log(data.error.message);
-          }
-        });
-    }
-   });
-``` 
-If all goes well, when you type "!help" in RaeedChat you should get your message, make sure there isn't a bot already using "!" if there is use another prefix or change your command name. 
-Here is the response the server sends when your message is sent successfully its a object
-```json
- response: {
-   code: 200,
-   message: "Sent your message - Early Access Bot API"
- }
-``` 
+### Message Create Event 
+The message create event is fired each time a message is sent. 
 
-You can read this by changing
-```js
-  .then((data) => {
-          if (data.error) {
-            console.log(data.error.message);
-          }
-  });
-```
-to 
-```js
-  .then((data) => {
-      if (data.error) {
-          console.log(data.error.message);
-      } 
-        if(data.response) {
-          console.log(data.response.message)
-        }
-   });
-````
-This is reading the object data.response.message from the json. 
-
-### Sending replies
-Now, you may want to send a reply instead, this is simple 
-```js
-ws.on("message", (json) => {
-  const { e, d } = JSON.parse(json);
-  if (e === "MESSAGE_CREATE") { //checks for MESSAGE_CREATE event
-    if (d.message == "!help") {
-      fetch(`https://api.raeedchat.com/api/v1/sendReply`/* Gateway */, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer YOUR_TOKEN"//authorization
-        },
-        body: JSON.stringify({
-          title: "YOUR_EMBED_TITLE",//optional but recommended
-          description: "YOUR_DESCRIPTION",//optional but recommended
-          image: "YOUR_IMAGE"// optional not needed if you don't have a image
-        })
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            console.log(data.error.message);
-          }
-        });
-    }
-   });
-```
-
-### WEBSOCKET EVENTS AND RESPONSES
-
-MESSAGE_DELETE = Deleted message 
-
-Returns:
+The official name is MESSAGE_CREATE, so listening for the MESSAGE_CREATE event will allow you to receive messages. This is what the message create event provides: 
 ```json 
-{e:"MESSAGE_DELETE", d: "id"}
+{
+  "d": {
+    "name": info.response.name,
+    "message": message,
+    "id": info.response.id,
+    "messageid": messageid,
+    "pings": pingedusers,
+    "badge": badge
+  }
+}
 ```
 
-INIT_FAIL = initialization failed
-Returns: 
-```json
-{e: "INIT_FAIL"}
-```
-BOT_EMBED = Bot embed
+### INIT Failed Event 
+This event contains **no response**. When it is fired it means your initialization has been denied. This is most likely due to a wrong token. The actual name is INIT_FAILED. Listen for that if you want to handle this event :)
+
+### INIT Ok Event 
+The INIT_OK event is the event that says that the initialization information has been verified and your connection was successful. Listen for INIT_OK to handle this.  
+
+### Message Delete Event 
+The MESSAGE_DELETE event is the event that fires when a message is deleted. It would return this 
 ```json 
-{e: "BOT_EMBED", d: {
-  name: "NAME OF BOT",
-  title: "EMBED TITLE",
-  message: "EMBED DESCRIPTION",
-  image: "IMAGE URL"
-}}
-```
-
-Example
-```js
-ws.on("message", (json) => {
-  const { e, d } = JSON.parse(json); // parses the json
-  if (e === "BOT_EMBED") { //checks for the event
-      console.log(d.name) // take the name from the d object 
-  });
+{ 
+ "d": "MESSAGE_ID" 
+}
 ```
