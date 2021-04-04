@@ -102,7 +102,7 @@ Sending embeds through our bot api is quick and easy! Put your `Content-Type: ap
 {
   "title": "EMBED TITLE" 
   "description": "DESCRIPTION" 
-  "image": "IMAGE URL"
+  "image": "IMAGE_URL"
 }
 ```
 Any of these are optional but please send at least one. Make this request to `https://api.raeedchat.com/api/v1/sendMessage`. The response is the following: 
@@ -113,7 +113,7 @@ Any of these are optional but please send at least one. Make this request to `ht
   "embed": {
     "title": "TITLE",
     "description": "DESCRIPTION",
-    "image": "imageurl" 
+    "image": "IMAGE_URL" 
   }
 }
 ```
