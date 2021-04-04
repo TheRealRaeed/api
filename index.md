@@ -76,7 +76,7 @@ To send a message you need to make a request with the `Content-Type: application
 Here is that information in table form
 | Field        | Type        | Description                    |
 | ------------ | ----------- | ------------------------------ |
-| `message`      |  `String`   | The message you want to send |
+| `message`    |  `String`   | The message you want to send   |
 
 
 The endpoint you send this request to is `https://api.raeedchat.com/api/v1/sendMessage`. Once completed you should get this: 
