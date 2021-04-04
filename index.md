@@ -104,4 +104,27 @@ Sending embeds through our bot api is quick and easy! Put your `Content-Type: ap
   "image": "IMAGE URL"
 }
 ```
-Any of these are optional but please send at least one. 
+Any of these are optional but please send at least one. Make this request to `https://api.raeedchat.com/api/v1/sendMessage`. The response is the following: 
+```json
+{
+  "code": 200,
+  "success": true,
+  "embed": {
+    "title": "TITLE",
+    "description": "DESCRIPTION",
+    "image": "imageurl" 
+  }
+}
+```
+If any of the fields aren't defined they will return `undefined` or `null`. 
+
+This is if there is a error:
+```json
+{
+  "code": "ERROR_CODE", 
+  "success": false,
+  "errormessage": "ERROR_MESSAGE"
+}
+``` 
+*The error code is normally a number please handle it as so!*
+
