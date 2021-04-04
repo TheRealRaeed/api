@@ -92,6 +92,7 @@ This is a fully successful response. If there is a error then you will get this:
 *The error code is normally a number please handle it as so!*
 
 ![BOT](https://cdn.discordapp.com/attachments/821092261165006861/828393827294642196/unknown.png)
+
 This is what it will look like when sent.
 
 
