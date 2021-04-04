@@ -65,7 +65,12 @@ Send data to our api for sending to the chat.
 `https://api.raeedchat.com/api/v1/sendReply` - Send embed with Bot API
 
 ### Sending messages 
-To send a message you need to make a request with the `Content-Type: application/json` header and `Authorization: TOKEN` header. Make sure to replace TOKEN with your actual token! 
+To send a message you need to make a request with the `Content-Type: application/json` header and `Authorization: TOKEN` header. Make sure to replace TOKEN with your actual token! Heres the data to send in the body: 
+```json 
+{
+  "message": "YOUR_MESSAGE
+}
+```
 The endpoint you send this request to is `https://api.raeedchat.com/api/v1/sendMessage`. Once completed you should get this: 
 ```json
 {
@@ -88,3 +93,15 @@ This is a fully successful response. If there is a error then you will get this:
 
 ![BOT](https://cdn.discordapp.com/attachments/821092261165006861/828393827294642196/unknown.png)
 This is what it will look like when sent.
+
+
+### Sending Embeds
+Sending embeds through our bot api is quick and easy! Put your `Content-Type: application/json` header and `Authorization: TOKEN` headers and then write this in the post data: 
+```json 
+{
+  "title": "EMBED TITLE" 
+  "description": "DESCRIPTION" 
+  "image": "IMAGE URL"
+}
+```
+Any of these are optional but please send at least one. 
