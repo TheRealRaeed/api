@@ -66,11 +66,13 @@ Send data to our api for sending to the chat.
 
 ### Sending messages 
 To send a message you need to make a request with the `Content-Type: application/json` header and `Authorization: TOKEN` header. Make sure to replace TOKEN with your actual token! Heres the data to send in the body: 
+
 ```json 
 {
   "message": "YOUR_MESSAGE
 }
 ```
+
 The endpoint you send this request to is `https://api.raeedchat.com/api/v1/sendMessage`. Once completed you should get this: 
 ```json
 {
@@ -100,11 +102,20 @@ This is what it will look like when sent.
 Sending embeds through our bot api is quick and easy! Put your `Content-Type: application/json` header and `Authorization: TOKEN` headers and then write this in the post data: 
 ```json 
 {
-  "title": "EMBED TITLE" 
+  "title": "EMBED_TITLE" 
   "description": "DESCRIPTION" 
   "image": "IMAGE_URL"
 }
 ```
+
+Heres a simple table to show you:
+
+| Field       | Type        | Description          |
+| ----------- | ----------- | -------------------- |
+| title       |  String     | Title of embed       |
+| description |  String     | Description of embed |
+| image       |  String     | Image URL of embed   |
+
 Any of these are optional but please send at least one. Make this request to `https://api.raeedchat.com/api/v1/sendMessage`. The response is the following: 
 ```json
 {
